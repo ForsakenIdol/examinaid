@@ -1,0 +1,84 @@
+{% extends "login.html" %}
+
+{% block content %}
+
+<!-- Variables needed: setType (multiChoice, shortAnswer, or openAnswer), setTypeString, totalQuestions, numOptions (number of multiple choice options) -->
+
+<link rel="stylesheet" href="../../static/css/test.css"/>
+<nav class="navbar-hidden nav-abs navbar-expand-md nav-transparent">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('managetests') }}">
+        <span class="far fa-arrow-alt-circle-left nav-back nav-white"></span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<section class="green">
+  <div class="container">
+    <div class="row vertical-align">
+      <div class="col-md-8">
+        <h2>Create {{ setTypeString }} Question Set</h2>
+        <p>Create a {{ setTypeString.lower() }} question set for students</p>
+      </div>
+      <div class="col-md-4 d-none d-md-block">
+        <img class="img-lg" src="../../static/resources/managequestion.svg" alt=""> 
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <p><strong>Note: </strong> following form must be completed in one sitting.</p>
+    <form id="example-test-form" method="POST">
+      <div class="question-box">
+        <h3>Test Information</h3>
+
+        <label for="unitName">Unit Name</label>
+        <br>
+        <input class="test-input" id="unitName" name="unitName" required type="text" />
+        <br>
+
+        <label for="unitCode">Unit Code</label>
+        <br>
+        <input class="test-input" id="unitCode" name="unitCode" required type="text" />
+        <br>
+      </div>
+      <!-- Question set start -->
+      {% for num in range(1, totalQuestions + 1) %}
+      <div class="row question-box add-question">
+        <h3>Question {{ num }}</h3>
+        <br>
+        <br>
+        <label for="marks{{ num }}">Marks</label>
+        <br>
+        <input type="number" class="test-input" id="marks{{ num }}" name="marks{{ num }}" required />
+        <br>
+        <br>
+        <label for="prompt{{ num }}">Prompt</label>
+        <br>
+        <input type="text" class="test-input" id="prompt{{ num }}" name="prompt{{ num }}" required />
+        <br>
+        <br>
+        {% if setType == "multiChoice" %}
+        <ul class="options option-input" id="options{{ num }}">
+          {% for i in range(numOptions) %}
+            <li>
+              <label for="options{{ num }}-{{ i }}">Option {{ i + 1 }}:</label>
+              <input id="options{{ num }}-{{ i }}" name="options{{ num }}-{{ i }}" type="text" />
+            </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% if setType != "openAnswer" %}
+          <label for="answer{{ num }}">Answer</label>
+          <input type="text" class="test-input" id="answer{{ num }}" name="answer{{ num }}" required />
+        {% endif %}
+      </div>
+      {% endfor %}
+      <input type="submit" class="plain-btn lg test-btn" value="Submit Question Set"  id="submit-example-test-form"/>
+    </form>
+  </div>
+</section>
+
+{% endblock content %}

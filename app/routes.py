@@ -815,3 +815,15 @@ def changepassword():
         print("Password for {} updated successfully.".format(current_user.username))
         return redirect(url_for('userprofile'))
     return render_template("changepassword.html", title="Change Password", resetPasswordForm=form)
+
+@app.route('/newaddquestions/<qtype>')
+@login_required
+def newaddquestions(qtype):
+  if (qtype == "multiChoice"):
+    return render_template('tests/addtest_template.html', setType=qtype, setTypeString="Multiple Choice", totalQuestions=10, numOptions=4)
+  elif (qtype == "shortAnswer"):
+    return render_template('tests/addtest_template.html', setType=qtype, setTypeString="Short Answer", totalQuestions=10, numOptions=4)
+  elif (qtype == "openAnswer"):
+    return render_template('tests/addtest_template.html', setType=qtype, setTypeString="Open Answer", totalQuestions=10, numOptions=4)
+  else: # Invalid question set type
+    return redirect(url_for('userprofile'))
