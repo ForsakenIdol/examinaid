@@ -1,5 +1,7 @@
 # ExaminAid &middot; [![Flask 1.1.2](https://img.shields.io/badge/flask-1.0.2-blue.svg)](https://pypi.org/project/Flask/) [![Python 3.7.2](https://img.shields.io/badge/python-3.7.2-blue.svg)](https://www.python.org/downloads/release/python-372/) 
 
+***Note:** As of June 14, 2020, ForsakenIdol forked the main repository to continue developing this application alone.*
+
 ## Overview
 
 **ExaminAid** is a UWA Computer Science assessment preparation application containing various resources in the form of test questions and answers. The application is accessible to anyone who creates an account on the server where ExaminAid is running and contains all the question sets available to users. ExaminAid is completely free and has an intuitive and simple-to-use user interface for everyone, both students and teachers. The creators of ExaminAid welcome any feedback via the contact form on the ExaminAid website.
